@@ -1,0 +1,63 @@
+<div class="page-container">
+  <div class="prompt-list-container fade-in">
+    <div class="prompt-list-header">
+      <h1>Writing Prompts</h1>
+      <p class="subtitle">Explore creative writing ideas from our community</p>
+      <a routerLink="/prompt/create" class="btn-create">
+        <span class="material-icons">add_circle</span>
+        Create New Prompt
+      </a>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="loading" class="loading-container">
+      <span class="material-icons loading-icon">sync</span>
+      <p>Loading prompts...</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="error" class="status-message error-message fade-in">
+      <span class="material-icons status-icon">error</span>
+      <div class="status-content">
+        <h3>Something went wrong</h3>
+        <p>{{ errorMessage || 'We couldn\'t load the prompts. Please try again.' }}</p>
+        <button (click)="loadPrompts()" class="btn-retry">
+          <span class="material-icons">refresh</span>
+          Try Again
+        </button>
+      </div>
+    </div>
+
+    <!-- No Prompts Message -->
+    <div *ngIf="!loading && !error && prompts.length === 0" class="empty-state fade-in">
+      <span class="material-icons empty-icon">lightbulb</span>
+      <h3>No prompts yet</h3>
+      <p>Be the first to create a writing prompt!</p>
+      <a routerLink="/prompt/create" class="btn-create-empty">
+        <span class="material-icons">add_circle</span>
+        Create New Prompt
+      </a>
+    </div>
+
+    <!-- Prompts List -->
+    <div *ngIf="!loading && !error && prompts.length > 0" class="prompts-grid">
+      <div *ngFor="let prompt of prompts" class="prompt-card fade-in">
+        <div class="prompt-card-content">
+          <h2 class="prompt-title">{{ prompt.title }}</h2>
+          <p class="prompt-description">{{ prompt.description }}</p>
+          <div class="prompt-meta">
+            <span class="prompt-date">{{ prompt.createdAt | date:'mediumDate' }}</span>
+          </div>
+        </div>
+        <div class="prompt-actions">
+          <a [routerLink]="['/prompt/edit', prompt._id]" class="btn-action btn-edit">
+            <span class="material-icons">edit</span>
+          </a>
+          <button (click)="deletePrompt(prompt._id!)" class="btn-action btn-delete">
+            <span class="material-icons">delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

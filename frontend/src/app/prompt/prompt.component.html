@@ -1,0 +1,92 @@
+<div class="page-container">
+  <div class="prompt-container fade-in">
+    <div class="prompt-header">
+      <h1>{{ pageTitle }}</h1>
+      <p class="subtitle">{{ isEditMode ? 'Update your writing prompt' : 'Share your creative writing ideas with the community' }}</p>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="submitSuccess" class="status-message success-message fade-in">
+      <span class="material-icons status-icon">check_circle</span>
+      <div class="status-content">
+        <h3>Success!</h3>
+        <p>Your writing prompt has been created successfully.</p>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="submitError" class="status-message error-message fade-in">
+      <span class="material-icons status-icon">error</span>
+      <div class="status-content">
+        <h3>Something went wrong</h3>
+        <p>{{ errorMessage || 'We couldn\'t create your prompt. Please try again.' }}</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #promptForm="ngForm" class="prompt-form" [class.form-disabled]="isSubmitting">
+      <div class="form-group" [class.has-error]="promptForm.submitted && promptForm.controls['title']?.errors?.['required']">
+        <label for="title">
+          <span class="label-text">Title</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">title</span>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            [(ngModel)]="prompt.title"
+            required
+            class="form-control"
+            placeholder="Enter a compelling title"
+            [class.is-invalid]="promptForm.submitted && promptForm.controls['title']?.errors?.['required']"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="promptForm.submitted && promptForm.controls['title']?.errors?.['required']">
+          <span class="material-icons error-icon">error_outline</span>
+          Title is required
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="promptForm.submitted && promptForm.controls['description']?.errors?.['required']">
+        <label for="description">
+          <span class="label-text">Description</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon textarea-icon">description</span>
+          <textarea
+            id="description"
+            name="description"
+            [(ngModel)]="prompt.description"
+            required
+            class="form-control"
+            rows="5"
+            placeholder="Describe your writing prompt in detail..."
+            [class.is-invalid]="promptForm.submitted && promptForm.controls['description']?.errors?.['required']"
+            [disabled]="isSubmitting"></textarea>
+        </div>
+        <div class="error-message" *ngIf="promptForm.submitted && promptForm.controls['description']?.errors?.['required']">
+          <span class="material-icons error-icon">error_outline</span>
+          Description is required
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" (click)="cancelEdit()" [disabled]="isSubmitting">
+          <span class="material-icons">arrow_back</span>
+          Back to List
+        </button>
+        <button type="button" class="btn-reset" (click)="resetForm()" [disabled]="isSubmitting">
+          <span class="material-icons">refresh</span>
+          Reset
+        </button>
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting" class="material-icons">check_circle</span>
+          <span *ngIf="isSubmitting" class="material-icons loading-icon">sync</span>
+          {{ isSubmitting ? (isEditMode ? 'Updating...' : 'Creating...') : submitButtonText }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
