@@ -1,0 +1,44 @@
+<header class="app-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a routerLink="/">
+          <span class="material-icons logo-icon">auto_stories</span>
+          <span class="logo-text">Writing Prompts</span>
+        </a>
+      </div>
+
+      <nav class="nav-links">
+        <ng-container *ngIf="isLoggedIn; else notLoggedIn">
+          <a routerLink="/prompts" routerLinkActive="active" class="nav-link">
+            <span class="material-icons">list</span>
+            <span class="link-text">My Prompts</span>
+          </a>
+          <a routerLink="/prompt/create" routerLinkActive="active" class="nav-link">
+            <span class="material-icons">add_circle</span>
+            <span class="link-text">Create</span>
+          </a>
+          <button (click)="logout()" class="nav-link logout-btn">
+            <span class="material-icons">logout</span>
+            <span class="link-text">Logout</span>
+          </button>
+          <div class="user-info" *ngIf="currentUser">
+            <span class="material-icons user-icon">account_circle</span>
+            <span class="username">{{ currentUser.username }}</span>
+          </div>
+        </ng-container>
+
+        <ng-template #notLoggedIn>
+          <a routerLink="/login" routerLinkActive="active" class="nav-link">
+            <span class="material-icons">login</span>
+            <span class="link-text">Login</span>
+          </a>
+          <a routerLink="/register" routerLinkActive="active" class="nav-link register-link">
+            <span class="material-icons">person_add</span>
+            <span class="link-text">Register</span>
+          </a>
+        </ng-template>
+      </nav>
+    </div>
+  </div>
+</header>

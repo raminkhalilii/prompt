@@ -1,0 +1,81 @@
+<div class="page-container">
+  <div class="auth-container fade-in">
+    <div class="auth-header">
+      <h1>Login</h1>
+      <p class="subtitle">Sign in to access your writing prompts</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="status-message error-message fade-in">
+      <span class="material-icons status-icon">error</span>
+      <div class="status-content">
+        <h3>Login Failed</h3>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" class="auth-form" [class.form-disabled]="isSubmitting">
+      <div class="form-group" [class.has-error]="loginForm.submitted && (username.invalid || errorMessage)">
+        <label for="username">
+          <span class="label-text">Username</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">person</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="loginData.username"
+            #username="ngModel"
+            required
+            class="form-control"
+            placeholder="Enter your username"
+            [class.is-invalid]="loginForm.submitted && username.invalid"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="loginForm.submitted && username.invalid">
+          <span class="material-icons error-icon">error_outline</span>
+          Username is required
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="loginForm.submitted && (password.invalid || errorMessage)">
+        <label for="password">
+          <span class="label-text">Password</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">lock</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="loginData.password"
+            #password="ngModel"
+            required
+            class="form-control"
+            placeholder="Enter your password"
+            [class.is-invalid]="loginForm.submitted && password.invalid"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="loginForm.submitted && password.invalid">
+          <span class="material-icons error-icon">error_outline</span>
+          Password is required
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting" class="material-icons">login</span>
+          <span *ngIf="isSubmitting" class="material-icons loading-icon">sync</span>
+          {{ isSubmitting ? 'Signing in...' : 'Sign In' }}
+        </button>
+      </div>
+
+      <div class="auth-links">
+        <p>Don't have an account? <a routerLink="/register">Sign up</a></p>
+      </div>
+    </form>
+  </div>
+</div>

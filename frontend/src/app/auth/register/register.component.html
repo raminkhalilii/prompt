@@ -1,0 +1,116 @@
+<div class="page-container">
+  <div class="auth-container fade-in">
+    <div class="auth-header">
+      <h1>Register</h1>
+      <p class="subtitle">Create an account to start sharing your writing prompts</p>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage" class="status-message error-message fade-in">
+      <span class="material-icons status-icon">error</span>
+      <div class="status-content">
+        <h3>Registration Failed</h3>
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #registerForm="ngForm" class="auth-form" [class.form-disabled]="isSubmitting">
+      <div class="form-group" [class.has-error]="registerForm.submitted && (username.invalid || errorMessage)">
+        <label for="username">
+          <span class="label-text">Username</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">person</span>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="registerData.username"
+            #username="ngModel"
+            required
+            class="form-control"
+            placeholder="Choose a username"
+            [class.is-invalid]="registerForm.submitted && username.invalid"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="registerForm.submitted && username.invalid">
+          <span class="material-icons error-icon">error_outline</span>
+          Username is required
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="registerForm.submitted && (email.invalid || errorMessage)">
+        <label for="email">
+          <span class="label-text">Email</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">email</span>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            [(ngModel)]="registerData.email"
+            #email="ngModel"
+            required
+            email
+            class="form-control"
+            placeholder="Enter your email address"
+            [class.is-invalid]="registerForm.submitted && email.invalid"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="registerForm.submitted && email.errors?.['required']">
+          <span class="material-icons error-icon">error_outline</span>
+          Email is required
+        </div>
+        <div class="error-message" *ngIf="registerForm.submitted && email.errors?.['email']">
+          <span class="material-icons error-icon">error_outline</span>
+          Please enter a valid email address
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="registerForm.submitted && (password.invalid || errorMessage)">
+        <label for="password">
+          <span class="label-text">Password</span>
+          <span class="required-indicator">*</span>
+        </label>
+        <div class="input-container">
+          <span class="material-icons input-icon">lock</span>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="registerData.password"
+            #password="ngModel"
+            required
+            minlength="6"
+            class="form-control"
+            placeholder="Create a password (min. 6 characters)"
+            [class.is-invalid]="registerForm.submitted && password.invalid"
+            [disabled]="isSubmitting">
+        </div>
+        <div class="error-message" *ngIf="registerForm.submitted && password.errors?.['required']">
+          <span class="material-icons error-icon">error_outline</span>
+          Password is required
+        </div>
+        <div class="error-message" *ngIf="registerForm.submitted && password.errors?.['minlength']">
+          <span class="material-icons error-icon">error_outline</span>
+          Password must be at least 6 characters long
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <span *ngIf="!isSubmitting" class="material-icons">person_add</span>
+          <span *ngIf="isSubmitting" class="material-icons loading-icon">sync</span>
+          {{ isSubmitting ? 'Creating Account...' : 'Create Account' }}
+        </button>
+      </div>
+
+      <div class="auth-links">
+        <p>Already have an account? <a routerLink="/login">Sign in</a></p>
+      </div>
+    </form>
+  </div>
+</div>
