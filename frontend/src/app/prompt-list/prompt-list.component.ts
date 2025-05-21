@@ -31,6 +31,8 @@ export class PromptListComponent implements OnInit {
     this.promptService.getPrompts().subscribe({
       next: (prompts) => {
         this.prompts = prompts;
+        // Sort prompts to show liked ones first
+        this.sortPrompts();
         this.loading = false;
       },
       error: (error) => {
@@ -54,5 +56,46 @@ export class PromptListComponent implements OnInit {
         }
       });
     }
+  }
+
+  toggleLike(prompt: Prompt): void {
+    if (!prompt._id) return;
+
+    // Optimistically update UI
+    prompt.liked = !prompt.liked;
+
+    // Sort prompts to show liked ones first
+    this.sortPrompts();
+
+    // Call API to persist the change
+    this.promptService.toggleLike(prompt._id).subscribe({
+      next: (updatedPrompt) => {
+        console.log('Prompt like status updated:', updatedPrompt);
+        // Update the prompt in the array with the response from the server
+        const index = this.prompts.findIndex(p => p._id === updatedPrompt._id);
+        if (index !== -1) {
+          this.prompts[index] = updatedPrompt;
+          // Re-sort prompts
+          this.sortPrompts();
+        }
+      },
+      error: (error) => {
+        console.error('Error toggling like status:', error);
+        // Revert the optimistic update if there's an error
+        prompt.liked = !prompt.liked;
+        // Re-sort prompts
+        this.sortPrompts();
+        alert('Failed to update like status: ' + (error.message || 'Unknown error'));
+      }
+    });
+  }
+
+  private sortPrompts(): void {
+    // Sort prompts to show liked ones first
+    this.prompts.sort((a, b) => {
+      if (a.liked && !b.liked) return -1;
+      if (!a.liked && b.liked) return 1;
+      return 0;
+    });
   }
 }

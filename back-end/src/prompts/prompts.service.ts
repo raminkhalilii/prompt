@@ -48,4 +48,17 @@ export class PromptsService {
     return deletedPrompt;
   }
 
+  async toggleLike(id: string): Promise<Prompt> {
+    const prompt = await this.promptModel.findById(id).exec();
+    if (!prompt) {
+      throw new NotFoundException(`Prompt with ID "${id}" not found`);
+    }
+
+    // Toggle the liked status
+    prompt.liked = !prompt.liked;
+
+    // Save the updated prompt
+    return prompt.save();
+  }
+
 }

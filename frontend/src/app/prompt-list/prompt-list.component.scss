@@ -18,6 +18,14 @@ $transition: all 0.3s ease;
   to { transform: rotate(360deg); }
 }
 
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.3); }
+  70% { transform: scale(1); }
+}
+
 // Global styles
 :host {
   font-family: 'Inter', sans-serif;
@@ -247,12 +255,54 @@ $transition: all 0.3s ease;
   flex: 1;
 }
 
+.prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
 .prompt-title {
   font-size: 1.25rem;
   font-weight: 600;
-  margin: 0 0 0.75rem;
+  margin: 0;
   color: $text-color;
   line-height: 1.3;
+  flex: 1;
+}
+
+.btn-like {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+  border-radius: 50%;
+
+  .material-icons {
+    font-size: 1.5rem;
+    color: $text-light;
+    transition: $transition;
+  }
+
+  &:hover {
+    background-color: rgba($error-color, 0.1);
+
+    .material-icons {
+      color: $error-color;
+    }
+  }
+
+  &.liked {
+    .material-icons {
+      color: $error-color;
+      animation: heartBeat 1s;
+    }
+  }
 }
 
 .prompt-description {

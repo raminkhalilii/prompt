@@ -52,6 +52,14 @@ export class PromptService {
       );
   }
 
+  // Toggle like status of a prompt
+  toggleLike(id: string): Observable<Prompt> {
+    return this.http.patch<Prompt>(`${this.apiUrl}/${id}/toggle-like`, {})
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   // Error handling
   private handleError(error: any) {
     let errorMessage = '';

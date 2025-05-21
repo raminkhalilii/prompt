@@ -1,4 +1,4 @@
-import { IsString, IsOptional } from 'class-validator';
+import { IsString, IsOptional, IsBoolean } from 'class-validator';
 import { Schema as MongooseSchema } from 'mongoose';
 
 export class UpdatePromptDto {
@@ -12,4 +12,8 @@ export class UpdatePromptDto {
 
   @IsOptional()
   readonly createdBy?: MongooseSchema.Types.ObjectId;
+
+  @IsOptional()
+  @IsBoolean()
+  readonly liked?: boolean;
 }

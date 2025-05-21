@@ -13,6 +13,9 @@ export class Prompt {
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User' })
   createdBy: MongooseSchema.Types.ObjectId;
+
+  @Prop({ default: false })
+  liked: boolean;
 }
 
 export const PromptSchema = SchemaFactory.createForClass(Prompt);

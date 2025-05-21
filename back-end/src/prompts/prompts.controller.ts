@@ -31,4 +31,9 @@ export class PromptsController {
   remove(@Param('id') id: string) {
     return this.promptsService.remove(id);
   }
+
+  @Patch(':id/toggle-like')
+  toggleLike(@Param('id') id: string) {
+    return this.promptsService.toggleLike(id);
+  }
 }

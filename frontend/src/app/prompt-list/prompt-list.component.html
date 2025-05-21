@@ -43,7 +43,12 @@
     <div *ngIf="!loading && !error && prompts.length > 0" class="prompts-grid">
       <div *ngFor="let prompt of prompts" class="prompt-card fade-in">
         <div class="prompt-card-content">
-          <h2 class="prompt-title">{{ prompt.title }}</h2>
+          <div class="prompt-header">
+            <h2 class="prompt-title">{{ prompt.title }}</h2>
+            <button (click)="toggleLike(prompt)" class="btn-like" [class.liked]="prompt.liked">
+              <span class="material-icons">{{ prompt.liked ? 'favorite' : 'favorite_border' }}</span>
+            </button>
+          </div>
           <p class="prompt-description">{{ prompt.description }}</p>
           <div class="prompt-meta">
             <span class="prompt-date">{{ prompt.createdAt | date:'mediumDate' }}</span>
