@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" fill="none">
+  <!-- Background elements -->
+  <circle cx="300" cy="200" r="150" fill="#E8EEFF" />
+
+  <!-- Notebook -->
+  <rect x="200" y="120" width="200" height="240" rx="10" fill="white" stroke="#4361EE" stroke-width="3" />
+
+  <!-- Notebook spiral -->
+  <path d="M200 140 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 170 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 200 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 230 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 260 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 290 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+  <path d="M200 320 H400" stroke="#4361EE" stroke-width="2" stroke-dasharray="5 5" />
+
+  <!-- Writing prompt text -->
+  <rect x="220" y="150" width="160" height="10" rx="5" fill="#4361EE" opacity="0.7" />
+  <rect x="220" y="180" width="120" height="10" rx="5" fill="#4361EE" opacity="0.5" />
+  <rect x="220" y="210" width="140" height="10" rx="5" fill="#4361EE" opacity="0.6" />
+  <rect x="220" y="240" width="100" height="10" rx="5" fill="#4361EE" opacity="0.4" />
+
+  <!-- Pencil -->
+  <path d="M380 100 L420 60 L430 70 L390 110 Z" fill="#FFD166" />
+  <path d="M380 100 L390 110 L380 120 Z" fill="#EF476F" />
+  <path d="M420 60 L430 70 L440 60 L430 50 Z" fill="#444444" />
+
+  <!-- Light bulb (idea) -->
+  <circle cx="150" cy="100" r="25" fill="#FFD166" />
+  <path d="M150 125 L150 140" stroke="#FFD166" stroke-width="5" stroke-linecap="round" />
+  <path d="M140 130 L160 130" stroke="#FFD166" stroke-width="3" stroke-linecap="round" />
+  <path d="M142 135 L158 135" stroke="#FFD166" stroke-width="3" stroke-linecap="round" />
+
+  <!-- Decorative elements -->
+  <circle cx="450" cy="150" r="15" fill="#06D6A0" opacity="0.7" />
+  <circle cx="470" cy="180" r="10" fill="#EF476F" opacity="0.5" />
+  <circle cx="440" cy="200" r="12" fill="#FFD166" opacity="0.6" />
+
+  <!-- Stars/sparkles -->
+  <path d="M130 200 L140 210 L130 220 L120 210 Z" fill="#4361EE" opacity="0.8" />
+  <path d="M450 250 L460 260 L450 270 L440 260 Z" fill="#EF476F" opacity="0.8" />
+  <path d="M170 300 L180 310 L170 320 L160 310 Z" fill="#06D6A0" opacity="0.8" />
+</svg>

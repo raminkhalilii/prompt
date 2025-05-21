@@ -18,6 +18,19 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Add a class to prevent animation flicker on page load
+html.js-loaded .animate-on-scroll {
+  visibility: visible;
+  /* Don't set opacity here - let the component handle it */
+}
+
+// Ensure elements are visible when JavaScript is disabled
+html:not(.js-loaded) .animate-on-scroll {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
 // Focus styles for accessibility
 :focus {
   outline: 3px solid rgba(67, 97, 238, 0.3);
