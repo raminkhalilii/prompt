@@ -7,14 +7,15 @@ async function bootstrap() {
 
   // Enable CORS for frontend requests
   app.enableCors({
-    origin: 'http://localhost:4200', // Angular default port
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    origin: true, // Allow requests from any origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
 
   // Enable validation
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(3000);
+
 }
 bootstrap();
